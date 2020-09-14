@@ -11,7 +11,7 @@ vid = cv2.VideoCapture(0)
 
 while 1:
     ret, img = vid.read()
-
+    og_im = img.copy()
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 
     gray = cv2.GaussianBlur(gray,(5,5),0)
@@ -26,7 +26,7 @@ while 1:
     for c in contours:
         
         peri = cv2.arcLength(c, True)
-        approx = cv2.approxPolyDP(c, 0.018 * peri, True)
+        approx = cv2.approxPolyDP(c, 0.008 * peri, True)
     
         if len(approx) == 4:
             screenCnt = approx
@@ -44,14 +44,14 @@ while 1:
         Cropped = gray[topx:bottomx+1, topy:bottomy+1]
         
         text = pytesseract.image_to_string(Cropped, 'tha')
-        _database.check_plate(text)
-        
+        _database.check_plate(text,og_im)
+        text = pytesseract.image_to_string(img, 'tha')
+        _database.check_plate(text,og_im)
         Cropped = cv2.resize(Cropped,(400,200))
         cv2.imshow('Cropped',Cropped)
 
     cv2.imshow('Edge', img)
     
-    time.sleep(0.2)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
