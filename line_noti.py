@@ -1,16 +1,18 @@
+import os
 from datetime import datetime
-from io import BytesIO
-from PIL import Image
+from dotenv import load_dotenv
+
+load_dotenv()
 
 url = 'https://notify-api.line.me/api/notify'
-token = '4yOP5dsdx4aYTBxRAXEEtANyQSnMvH1qIlkrk9IxpVk'
+token = os.getenv('TOKEN')
 headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'Bearer '+token}
 
 def notifyFile(plate, name, lname):
     file = {'imageFile':open("./image/detected.jpg",'rb')}
     text = '\n' + plate + " | " + name + ' ' + lname + '\n' + "เวลา : " + datetime.now().strftime("%H:%M:%S")
     payload = {'message':text}
-    return _lineNotify(payload,file)
+    return _lineNotify(payload, file)
 
 def _lineNotify(payload, file=None):
     import requests
