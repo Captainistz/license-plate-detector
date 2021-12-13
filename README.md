@@ -1,6 +1,6 @@
 # License-Plate Detector
 
-Hi! This project was created for SMTE Project Contest. Still in working! 😁
+Hi! This project was created for SMTE Project Contest. Still in working! 😁 (Abandoned)
 
 ## About
 This project can be detected and read Thai license plate using [Image Processing](https://en.wikipedia.org/wiki/Digital_image_processing) and [Optical Character Recognition](https://en.wikipedia.org/wiki/Optical_character_recognition)
